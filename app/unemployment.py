@@ -23,3 +23,10 @@ print(type(parsed_response))
 pprint(parsed_response)
 
 data = parsed_response["data"]
+
+# add breakpoint as a debugging technique to enter into interactive debugging console
+
+breakpoint()
+
+latest = parsed_response["data"][0]
+print(latest)
