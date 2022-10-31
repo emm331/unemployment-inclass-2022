@@ -47,3 +47,8 @@ python app/unemployment.py
 # or pass from environment
 ALPHAVANTAGE_API_KEY= "abc123" python app/unemployment.py
 ```
+Run stocks report:
+
+```sh
+python app/stocks.py
+```
