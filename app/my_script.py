@@ -1,4 +1,3 @@
-print("Hello")
-print(2+2)
+print("HELLO")
 
-#Usage
+print(2+2)
