@@ -11,3 +11,6 @@ plotly
 # using this to find and run our tests 
 
 pytest 
+
+#adding line related to sengrid package
+sendgrid==6.6.0
