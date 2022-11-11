@@ -1,58 +1,65 @@
-# app/email_service.py
+from random import choice
 
-import os
-from dotenv import load_dotenv
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
-
-load_dotenv()
-
-SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
-SENDER_EMAIL_ADDRESS = os.getenv("SENDER_EMAIL_ADDRESS")
+VALID_OPTIONS = ["rock", "paper", "scissors"]
 
 
-def send_email(subject="[Daily Briefing] This is a test", html="<p>Hello World</p>", recipient_address=SENDER_EMAIL_ADDRESS):
-    """
-    Sends an email with the specified subject and html contents to the specified recipient,
-    If recipient is not specified, sends to the admin's sender address by default.
-    """
-    client = SendGridAPIClient(SENDGRID_API_KEY) #> <class 'sendgrid.sendgrid.SendGridAPIClient>
-    print("CLIENT:", type(client))
-    print("SUBJECT:", subject)
-    #print("HTML:", html)
 
-    message = Mail(from_email=SENDER_EMAIL_ADDRESS, to_emails=recipient_address, subject=subject, html_content=html)
-    try:
-        response = client.send(message)
-        print("RESPONSE:", type(response)) #> <class 'python_http_client.client.Response'>
-        print(response.status_code) #> 202 indicates SUCCESS
-        return response
-    except Exception as e:
-        print("OOPS", type(e), e)
-        return None
+def determine_winner(user_choice, computer_choice):
+    winners = {
+        "rock": {
+            "rock": None,
+            "paper": "paper",
+            "scissors": "rock",
+        },
+        "paper": {
+            "rock": "paper",
+            "paper": None,
+            "scissors": "scissors",
+        },
+        "scissors": {
+            "rock": "rock",
+            "paper": "scissors",
+            "scissors": None,
+        }
+    }
+    winning_choice = winners[user_choice][computer_choice]
+    return winning_choice
+
 
 
 if __name__ == "__main__":
-    example_subject = "[Daily Briefing] This is a test"
 
-    example_html = f"""
-    <h3>This is a test of the Daily Briefing Service</h3>
-    <h4>Today's Date</h4>
-    <p>Monday, January 1, 2040</p>
-    <h4>My Stocks</h4>
-    <ul>
-        <li>MSFT | +3%</li>
-        <li>GOOG | +2%</li>
-        <li>AAPL | +4%</li>
-    </ul>
-    <h4>My Forecast</h4>
-    <ul>
-        <li>10:00 AM | 65 DEGREES | CLEAR SKIES</li>
-        <li>01:00 PM | 70 DEGREES | CLEAR SKIES</li>
-        <li>04:00 PM | 75 DEGREES | CLEAR SKIES</li>
-        <li>07:00 PM | 67 DEGREES | PARTLY CLOUDY</li>
-        <li>10:00 PM | 56 DEGREES | CLEAR SKIES</li>
-    </ul>
-    """
+    # only run the code below when we run this file from the command-line
 
-    send_email(subject=example_subject, html=example_html)
+    # but not when we try to import from this file
+
+
+    #
+    # USER SELECTION
+    #
+
+    u = input("Please choose one of 'Rock', 'Paper', or 'Scissors': ").lower()
+    print("USER CHOICE:", u)
+    if u not in VALID_OPTIONS:
+        print("OOPS, TRY AGAIN")
+        exit()
+
+    #
+    # COMPUTER SELECTION
+    #
+
+    c = choice(VALID_OPTIONS)
+    print("COMPUTER CHOICE:", c)
+
+    #
+    # DETERMINATION OF WINNER
+    #
+
+    result = determine_winner(u, c).lower()
+
+    if result == u:
+        print("YOU WON")
+    elif result == c:
+        print("COMPUTER WON")
+    else:
+        print("TIE")
