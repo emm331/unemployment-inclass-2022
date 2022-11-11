@@ -26,10 +26,12 @@ def determine_winner(user_choice, computer_choice):
     return winning_choice
 
 
- # only run the code below when we run this file from the command line, 
- # but not when we try to import from this file
 
 if __name__ == "__main__":
+
+    # only run the code below when we run this file from the command-line
+
+    # but not when we try to import from this file
 
 
     #
