@@ -1,5 +1,9 @@
+<<<<<<< Updated upstream
 #alpha.py file
 
+=======
+# this is alpha.py
+>>>>>>> Stashed changes
 
 import os
 
