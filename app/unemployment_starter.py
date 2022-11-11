@@ -1,7 +1,4 @@
-
-
-
-
+#this is unemploymnt_starter.py
 
 import os
 import json
