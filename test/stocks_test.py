@@ -18,6 +18,8 @@ def test_usd_formatting():
 
     #assert format_usd("OOPS") == "______"
 
+
+
 def test_data_fetching():
     result = fetch_stocks_data("NFLX")
     assert isinstance(result, DataFrame)
@@ -27,5 +29,8 @@ def test_data_fetching():
     assert "high" in result.columns
     assert "low" in result.columns
 
-
     assert len(result) >= 100
+
+
+    #result = fetch_stocks_data("OOPS")
+    # todo: test invalid inputs. what should happen?
